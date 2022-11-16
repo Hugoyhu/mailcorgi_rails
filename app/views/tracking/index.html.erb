@@ -1,0 +1,29 @@
+<p>hello! tracking number:</p>
+<%= params[:id]%>
+
+<br>
+
+<br>
+
+<% if @data != nil %>
+
+  <p> Estimated Delivery Date: <%= @data["expected_delivery_date"] %></p>
+  <p> Destination Zip Code: <%= params[:id].slice(20..-1) %></p>
+
+
+  <br>
+  <p>Scan Events:</p>
+  <% @data["scans"].each do |scan| %>
+    <br>
+    <p>Scan Time: <%= scan["scan_date_time"] %></p>
+    <p>Scanned At: <%= scan["scan_facility_city"] %>, <%= scan["scan_facility_name"] %>, <%= scan["scan_facility_state"] %><p>
+    <p>Scanner Type: <%= scan["scanner_type"] %>, <%= scan["machine_name"] %><p></p>
+    <p>Scanner Type: <%= scan["mail_phase"] %></p>
+
+
+  <% end %>
+<% end %>
+
+<% if @data == nil %>
+  <p>Status not available. The tracking number may be incorrect or the status update is not yet available. Please verify your tracking number and try again later.</p>
+<% end %>
